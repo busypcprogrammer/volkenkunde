@@ -10,7 +10,7 @@ class pageController extends Controller
 {
     public function index()
     {
-
+        
     }
     
     public function parentHandler($parent, $page = 0)
@@ -24,6 +24,11 @@ class pageController extends Controller
     }
     
     public function postHandler($parent, $child, $post = null)
+    {
+        
+    }
+    
+    private function navigationTracker()
     {
         
     }
