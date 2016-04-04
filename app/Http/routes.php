@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'pageController@index');
+Route::get('/{parent?}/{page?}', 'pageController@parentHandler');
+Route::get('/{parent?}/{child?}/{page?}', 'pageController@childHandler');
+
+Route::get('/{parent?}/{post?}', 'pageController@postHandler');
+Route::get('/{parent?}/{child?}/{post?}', 'pageController@postHandler');
