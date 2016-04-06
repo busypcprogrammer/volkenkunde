@@ -19,7 +19,7 @@ class Post extends Migration
             $table->text('keywords');
             $table->text('content');
             $table->string('url');
-            $table->tinyInteger('hidden');
+            $table->string('thumbnail');
             $table->timestamp('uploaddate');
         });
     }
