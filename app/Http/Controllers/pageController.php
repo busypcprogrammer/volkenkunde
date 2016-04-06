@@ -10,7 +10,7 @@ class pageController extends Controller
 {
     public function index()
     {
-        echo self::navigationTracker();
+        $nav = self::navigationTracker();
         $posts = \DB::table('post')
                 ->select('title')
                 ->addSelect('content')
@@ -26,21 +26,22 @@ class pageController extends Controller
             $postListing .= '<div>' . $post->content . '</div>';
         }
         echo $postListing;
+        return view('home')->with(['nav' => $nav]);
     }
     
     public function categoryHandler($parent, $page = 0)
     {
-        
+        echo 'category';
     }
     
     public function subCategoryHandler($parent, $child, $page = 0)
     {
-        
+        echo 'sub-category';
     }
     
-    public function postHandler($parent, $child, $post = null)
+    public function postHandler($parent, $child, $post)
     {
-        
+        echo 'post';
     }
     
     private static function navigationTracker()
@@ -53,7 +54,7 @@ class pageController extends Controller
                 ->join('category', 'category.id', '=', 'navigation.categoryid')
                 ->orderBy('order')
                 ->get();
-        $nav = '';
+        $nav = '<div id="main-menu" class="col-md-12 no-padding navbar-collapse collapse block block-system block-menu">';
         foreach($navItems as $item)
         {
             $myString = '<ul>';
@@ -64,7 +65,7 @@ class pageController extends Controller
                     ->orderBy('order')
                     ->join('category', 'category.id', '=', 'navigation.categoryid')
                     ->get();
-            $myString .= '<li>' . $item->name . '</li>';
+            $myString .= '<li>' . $item->name;
             if (count($subNavItems) > 0)
             {
                 $myString .= '<ul>';
@@ -75,8 +76,8 @@ class pageController extends Controller
                 $myString .= '</ul>';
             }
             
-            $myString .= '</ul>';
-            $nav .= $myString;
+            $myString .= '</li></ul>';
+            $nav .= $myString . '</div>';
         }
         return $nav;
     }
